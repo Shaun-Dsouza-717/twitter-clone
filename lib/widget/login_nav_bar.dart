@@ -14,6 +14,7 @@ class LoginNavBar extends StatefulWidget {
 class _LoginNavBarState extends State<LoginNavBar> {
   @override
   Widget build(BuildContext context) {
+    // Returns a Scrollview widget
     return SingleChildScrollView(
       child: Expanded(
         child: Column(
@@ -21,6 +22,7 @@ class _LoginNavBarState extends State<LoginNavBar> {
             // Your other widgets here
             Container(
               height: 60,
+              // Setting height to double.infinity to make it fill the entire screen
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -42,6 +44,7 @@ class _LoginNavBarState extends State<LoginNavBar> {
                         foregroundColor:
                             MaterialStateProperty.all<Color>(Colors.blue),
                       ),
+                      //  Check if the user is using email or phone to login
                       child: widget.isEmail ? Text('Use email instead',
                           style: GoogleFonts.roboto(
                             color: Colors.blue,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:twitter/auth/signup.dart';
+import 'package:twitter/home/feed.dart';
 import 'package:twitter/widget/login_app_bar.dart';
 
 class Login extends StatefulWidget {
@@ -16,11 +17,11 @@ class _LoginState extends State<Login> {
     return Scaffold(
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(kToolbarHeight),
-            child: LoginAppBar()),
+            child: LoginAppBar(false)),
         body: Container(
             height: double.infinity,
             color: Colors.white,
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 35),
             child: SingleChildScrollView(
               child: Form(
                 child: Column(
@@ -40,7 +41,7 @@ class _LoginState extends State<Login> {
                           textAlign: TextAlign.left,
                           textDirection: TextDirection.rtl,
                         )),
-                    SizedBox(height: 20),
+                    SizedBox(height: 10),
                     Container(
                         width: double.infinity,
                         child: TextFormField(
@@ -57,7 +58,28 @@ class _LoginState extends State<Login> {
                               fontWeight: FontWeight.w400,
                             ),
                           ),
-                        )),
+                        )
+                        ),
+                        SizedBox(height: 35),
+                        Container(
+                        width: double.infinity,
+                        child: TextFormField(
+                          validator: (value) => null,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 3, color: Colors.red),
+                            ),
+                            hintText: 'Password',
+                            hintStyle: GoogleFonts.roboto(
+                              color: Colors.grey,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        )
+                        ),
                     SizedBox(height: 35),
                     Container(
                         width: double.infinity,
@@ -81,7 +103,13 @@ class _LoginState extends State<Login> {
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 )),
-                            onPressed: () {})),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Feed()),
+                              );
+                            })),
                     SizedBox(height: 25),
                     Container(
                         width: double.infinity,
