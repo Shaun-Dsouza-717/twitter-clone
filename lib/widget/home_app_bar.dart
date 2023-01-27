@@ -7,15 +7,15 @@ class HomeAppBar extends StatelessWidget {
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0,
-      // Setting the first icon button as the profile icon
-      leading: IconButton(
-        // Using ClipOval to clip the image to a circle
-        icon: ClipOval(
-            child: Image.network("https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg",
-                height: 30, width: 30,fit: BoxFit.cover,)),
-                // TODO : Add the onPressed function to open drawer
-        onPressed: () => Navigator.pop(context),
-      ),
+      // Setting the first icon button as the options icon
+      leading:     IconButton(
+            onPressed: () {},
+            icon: Image.asset(
+              "assets/images/more_options.png",
+              height: 23,
+              width: 23,
+              color: Colors.blue,
+            )),
       // Main Logo of Twitter set up in the title
       title: Image(
         image: AssetImage('assets/images/twitter.png'),
