@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:twitter/home/profile.dart';
 
 class HomeNavBar extends StatefulWidget {
   const HomeNavBar({super.key});
@@ -36,12 +37,12 @@ class _HomeNavBarState extends State<HomeNavBar> {
                 children: <Widget>[
                   IconButton(
                       icon: Image.asset(
-                        "assets/images/${isClicked ? "home_fill": "home_empty"}.png",
+                        "assets/images/${isClicked ? "home_fill" : "home_empty"}.png",
                         height: 35,
                         width: 30,
                         color: Colors.blue,
                       ),
-                      onPressed: () =>  setState(() {
+                      onPressed: () => setState(() {
                             isClicked = !isClicked;
                           })),
                   SizedBox(
@@ -54,10 +55,9 @@ class _HomeNavBarState extends State<HomeNavBar> {
                         width: 30,
                         color: Colors.blue,
                       ),
-                      onPressed: () => 
-                      setState(() {
-                        isClicked = !isClicked;
-                      })),
+                      onPressed: () => setState(() {
+                            isClicked = !isClicked;
+                          })),
                   SizedBox(
                     width: 77,
                   ),
@@ -72,7 +72,14 @@ class _HomeNavBarState extends State<HomeNavBar> {
                       fit: BoxFit.cover,
                     )),
                     // TODO : Add the onPressed function to open drawer
-                    onPressed: () => Navigator.pop(context),
+                    onPressed: () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Profile(),
+                        ),
+                      ),
+                    },
                   ),
                 ],
               ),

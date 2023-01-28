@@ -25,7 +25,7 @@ class _SignupState extends State<Signup> {
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(kToolbarHeight), 
-          child: LoginAppBar(true)),
+          child: LoginAppBar(isBack:true)),
       body: Container(
           height: double.infinity,
           color: Colors.white,

@@ -17,7 +17,7 @@ class _LoginState extends State<Login> {
     return Scaffold(
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(kToolbarHeight),
-            child: LoginAppBar(false)),
+            child: LoginAppBar(isBack:false)),
         body: Container(
             height: double.infinity,
             color: Colors.white,

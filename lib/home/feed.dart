@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:twitter/home/profile.dart';
 import 'package:twitter/widget/home_app_bar.dart';
 import 'package:twitter/widget/home_nav_bar.dart';
 
@@ -11,9 +13,19 @@ class Feed extends StatefulWidget {
 }
 
 class _FeedState extends State<Feed> {
-  List<int> items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-  bool isLiked = false;
-  bool isRetweeted = false;
+  List<int> items = [];
+  List<bool> isLiked = [];
+  List<bool> isRetweeted = [];
+
+  @override
+  void initState() {
+    super.initState();
+    items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+    setState(() {
+      isLiked = List.generate(items.length, (_) => false);
+      isRetweeted = List.generate(items.length, (_) => false);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +69,7 @@ class _FeedState extends State<Feed> {
                 Row(
                   children: <Widget>[
                     IconButton(
-                      padding: EdgeInsets.only(left: 3, bottom: 20),
+                      padding: EdgeInsets.only(left: 3, bottom: 60),
                       // Using ClipOval to clip the image to a circle
                       icon: ClipOval(
                           child: Image.network(
@@ -69,7 +81,14 @@ class _FeedState extends State<Feed> {
                       iconSize: 60,
                       alignment: Alignment.centerLeft,
                       // TODO : Add the onPressed function to open profile page
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Profile(),
+                          ),
+                        ),
+                      },
                     ),
                     SizedBox(width: 12),
                     Expanded(
@@ -101,16 +120,18 @@ class _FeedState extends State<Feed> {
                             children: [
                               IconButton(
                                   icon: Image.asset(
-                                    "assets/images/${isLiked ? "heart_full": "heart_empty"}.png",
+                                    "assets/images/${isLiked[index] ? "heart_full" : "heart_empty"}.png",
                                     height: 20,
                                     width: 20,
-                                    color: isLiked ? Colors.red :  Colors.blue,
+                                    color: isLiked[index]
+                                        ? Colors.red
+                                        : Colors.blue,
                                   ),
                                   onPressed: () => {
-                                    setState(() {
-                                      isLiked = !isLiked;
-                                    })
-                                  }),
+                                        setState(() {
+                                          isLiked[index] = !isLiked[index];
+                                        })
+                                      }),
                               Padding(
                                 padding: EdgeInsets.only(right: 15.0),
                                 child: Text("1.2K",
@@ -138,13 +159,16 @@ class _FeedState extends State<Feed> {
                                     "assets/images/retweet_clicked.png",
                                     height: 40,
                                     width: 40,
-                                    color: isRetweeted ? Color.fromARGB(255, 12, 215, 19) : Colors.blue,
+                                    color: isRetweeted[index]
+                                        ? Color.fromARGB(255, 12, 215, 19)
+                                        : Colors.blue,
                                   ),
                                   onPressed: () => {
-                                    setState(() {
-                                      isRetweeted = !isRetweeted;
-                                    })
-                                  }),
+                                        setState(() {
+                                          isRetweeted[index] =
+                                              !isRetweeted[index];
+                                        })
+                                      }),
                               Padding(
                                 padding: EdgeInsets.only(right: 10.0),
                                 child: Text("1.2K",
