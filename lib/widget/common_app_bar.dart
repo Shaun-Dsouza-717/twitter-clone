@@ -71,7 +71,7 @@ class CommonAppBar extends StatelessWidget {
                     height: 30,
                     width: 168,
                     child: Text(
-                      "0 Tweets",
+                      "1.2K Tweets",
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         color: Colors.grey.shade600,
