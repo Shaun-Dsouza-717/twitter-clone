@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:twitter/auth/signup.dart';
 import 'package:twitter/home/feed.dart';
-import 'package:twitter/widget/login_app_bar.dart';
+import 'package:twitter/widget/common_app_bar.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -17,7 +17,7 @@ class _LoginState extends State<Login> {
     return Scaffold(
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(kToolbarHeight),
-            child: LoginAppBar(isBack:false)),
+            child: CommonAppBar(isBack: false)),
         body: Container(
             height: double.infinity,
             color: Colors.white,
@@ -58,10 +58,9 @@ class _LoginState extends State<Login> {
                               fontWeight: FontWeight.w400,
                             ),
                           ),
-                        )
-                        ),
-                        SizedBox(height: 35),
-                        Container(
+                        )),
+                    SizedBox(height: 35),
+                    Container(
                         width: double.infinity,
                         child: TextFormField(
                           validator: (value) => null,
@@ -78,8 +77,7 @@ class _LoginState extends State<Login> {
                               fontWeight: FontWeight.w400,
                             ),
                           ),
-                        )
-                        ),
+                        )),
                     SizedBox(height: 35),
                     Container(
                         width: double.infinity,
@@ -106,8 +104,7 @@ class _LoginState extends State<Login> {
                             onPressed: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(
-                                    builder: (context) => Feed()),
+                                MaterialPageRoute(builder: (context) => Feed()),
                               );
                             })),
                     SizedBox(height: 25),
@@ -134,25 +131,30 @@ class _LoginState extends State<Login> {
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 )),
-                            onPressed: () {})
-                            ),
+                            onPressed: () {})),
                     SizedBox(height: 25),
                     Container(
-                      width: double.infinity,
-                      height: 62,
-                      child: Row(
-                        children: [
-                        Text("Don't have an account?",style: GoogleFonts.roboto(
+                        width: double.infinity,
+                        height: 62,
+                        child: Row(
+                          children: [
+                            Text(
+                              "Don't have an account?",
+                              style: GoogleFonts.roboto(
                                 color: Colors.black,
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
-                              ) ,),
-                        SizedBox(width: 0),
-                        TextButton(child: Text('Sign up', style: GoogleFonts.roboto(
-                                  color: Colors.blue,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                )), onPressed: () {
+                              ),
+                            ),
+                            SizedBox(width: 0),
+                            TextButton(
+                                child: Text('Sign up',
+                                    style: GoogleFonts.roboto(
+                                      color: Colors.blue,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                                onPressed: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -160,8 +162,8 @@ class _LoginState extends State<Login> {
                                     ),
                                   );
                                 }),
-                      ],)
-                    ),
+                          ],
+                        )),
                   ],
                 ),
               ),
