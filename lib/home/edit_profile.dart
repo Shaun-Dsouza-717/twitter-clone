@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:twitter/home/profile.dart';
+import 'package:twitter/validation/validators.dart';
+import 'package:twitter/widget/home_nav_bar.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
@@ -10,44 +12,44 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        title: Text(
-          "Edit Profile",
-          style: GoogleFonts.roboto(
-            color: Colors.black,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-          onPressed: () => Navigator.pop(context),
-        ),
-        actions:[
-          IconButton(
-            icon: Icon(
-              Icons.done,
-              color: Colors.blue,
+          elevation: 0,
+          backgroundColor: Colors.white,
+          title: Text(
+            "Edit Profile",
+            style: GoogleFonts.roboto(
+              color: Colors.black,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
             ),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Profile(),
+          ),
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
+            onPressed: () => Navigator.pop(context),
+          ),
+          actions: [
+            IconButton(
+              icon: Icon(
+                Icons.done,
+                color: Colors.blue,
+              ),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Profile(),
+                ),
               ),
             ),
-          ),
-        ]
-      ),
+          ]),
       body: SingleChildScrollView(
+          child: Form(
         child: Column(
           children: <Widget>[
             SizedBox(
@@ -94,7 +96,8 @@ class _EditProfileState extends State<EditProfile> {
                   Container(
                       width: 350,
                       child: TextFormField(
-                        validator: (value) => null,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator:((value) => nameValidator(value!)),
                         initialValue: "Shaun Dsouza",
                         decoration: InputDecoration(
                           labelText: "Name",
@@ -103,7 +106,7 @@ class _EditProfileState extends State<EditProfile> {
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                           ),
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                          floatingLabelBehavior: FloatingLabelBehavior.always,
                           border: OutlineInputBorder(
                             borderSide: BorderSide(width: 3, color: Colors.red),
                           ),
@@ -132,7 +135,7 @@ class _EditProfileState extends State<EditProfile> {
                           ),
                           floatingLabelBehavior: FloatingLabelBehavior.always,
                           border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 3, color: Colors.red),
+                            borderSide: BorderSide(width: 3, color: Colors.blue),
                           ),
                           hintText: 'Enter new bio',
                           hintStyle: GoogleFonts.roboto(
@@ -159,7 +162,7 @@ class _EditProfileState extends State<EditProfile> {
                           ),
                           floatingLabelBehavior: FloatingLabelBehavior.always,
                           border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 3, color: Colors.red),
+                            borderSide: BorderSide(width: 3, color: Colors.blue),
                           ),
                           hintText: 'Enter Location',
                           hintStyle: GoogleFonts.roboto(
@@ -175,10 +178,11 @@ class _EditProfileState extends State<EditProfile> {
                   Container(
                       width: 350,
                       child: TextFormField(
-                        validator: (value) => null,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) => emailValidator(value!),
                         initialValue: "",
                         decoration: InputDecoration(
-                          labelText: "Website",
+                          labelText: "Email",
                           labelStyle: GoogleFonts.roboto(
                             fontSize: 18,
                             color: Colors.black,
@@ -186,9 +190,9 @@ class _EditProfileState extends State<EditProfile> {
                           ),
                           floatingLabelBehavior: FloatingLabelBehavior.always,
                           border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 3, color: Colors.red),
+                            borderSide: BorderSide(width: 3, color: Colors.blue),
                           ),
-                          hintText: 'Enter Website',
+                          hintText: 'Enter Email',
                           hintStyle: GoogleFonts.roboto(
                             color: Colors.grey,
                             fontSize: 18,
@@ -201,7 +205,8 @@ class _EditProfileState extends State<EditProfile> {
             ),
           ],
         ),
-      ),
+      )),
+      bottomNavigationBar: HomeNavBar(),
     );
   }
 }
