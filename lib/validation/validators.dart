@@ -10,7 +10,7 @@ String emailValidator(String value) {
 }
 
 String nameValidator(String value) {
-  if (value?.length == 0) {
+  if (value.isEmpty) {
     return 'Please enter a Name';
   }
   return "";
