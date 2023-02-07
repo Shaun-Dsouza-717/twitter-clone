@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:twitter/auth/signup.dart';
@@ -12,6 +13,22 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final _formKey = GlobalKey<FormState>();
+  String _email = "", _password = "";
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  void _validateAndSubmit() async {
+      try {
+        UserCredential user = await _auth.signInWithEmailAndPassword(
+            email: _email, password: _password);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Feed()),
+        );
+      } catch (e) {
+        print('Error: $e');
+      }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +62,7 @@ class _LoginState extends State<Login> {
                     Container(
                         width: double.infinity,
                         child: TextFormField(
+                          onChanged: (value) => _email = value,
                           validator: (value) => null,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -63,6 +81,7 @@ class _LoginState extends State<Login> {
                     Container(
                         width: double.infinity,
                         child: TextFormField(
+                          onChanged: (value) => _password = value,
                           validator: (value) => null,
                           obscureText: true,
                           decoration: InputDecoration(
@@ -102,10 +121,11 @@ class _LoginState extends State<Login> {
                                   fontWeight: FontWeight.bold,
                                 )),
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Feed()),
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(builder: (context) => Feed()),
+                              // );
+                              _validateAndSubmit();
                             })),
                     SizedBox(height: 25),
                     Container(

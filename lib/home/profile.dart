@@ -12,14 +12,15 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  List<int> items = [];
+  
+  List<Map<String, dynamic>> items = [];
   List<bool> isLiked = [];
   List<bool> isRetweeted = [];
 
   @override
   void initState() {
     super.initState();
-    items = [1, 2, 3, 4, 5];
+    items = [{},{},{},{},{}];
     setState(() {
       isLiked = List.generate(items.length, (_) => false);
       isRetweeted = List.generate(items.length, (_) => false);

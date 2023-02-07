@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:twitter/auth/login.dart';
 import 'package:twitter/auth/signup.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 

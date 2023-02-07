@@ -3,9 +3,36 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:twitter/home/profile.dart';
 
 class TweetBuilder extends StatefulWidget {
-  final List<int> items;
+  final List<Map<String, dynamic>> items;
   final List<bool> isRetweeted;
   final List<bool> isLiked;
+  static const profileImageList = [
+    "https://pbs.twimg.com/profile_images/1588193737460645888/5TMfaLz2_400x400.png",
+    "https://pbs.twimg.com/profile_images/1439895378543906818/jYPAye0I_400x400.jpg",
+    "https://pbs.twimg.com/profile_images/1542768398727249920/-neNiKE9_400x400.jpg",
+    "https://pbs.twimg.com/profile_images/1439895378543906818/jYPAye0I_400x400.jpg",
+    "https://pbs.twimg.com/profile_images/1542768398727249920/-neNiKE9_400x400.jpg",
+    "https://pbs.twimg.com/profile_images/1439895378543906818/jYPAye0I_400x400.jpg",
+    "https://pbs.twimg.com/profile_images/1542768398727249920/-neNiKE9_400x400.jpg",
+  ];
+  static const nameList = [
+    "Real Madrid",
+    "Bayern Munich",
+    "FC Barcelona",
+    "Bayern Munich",
+    "FC Barcelona",
+    "Bayern Munich",
+    "FC Barcelona"
+  ];
+
+  static const tweetList = [
+    "We're back in the Champions League! 🏆\n\n#UCL #MiaSanMia #FCBayern",
+    "We're La Liga Champions ! 🏆\n\n#LaLiga #ForçaBarça #FCBarcelona",
+    "We're back in the Champions League! 🏆\n\n#UCL #MiaSanMia #FCBayern",
+    "We're La Liga Champions ! 🏆\n\n#LaLiga #ForçaBarça #FCBarcelona",
+    "We're back in the Champions League! 🏆\n\n#UCL #MiaSanMia #FCBayern",
+    "We're La Liga Champions ! 🏆\n\n#LaLiga #ForçaBarça #FCBarcelona"
+  ];
 
   const TweetBuilder(
       {required this.items,
@@ -47,7 +74,7 @@ class _TweetBuilderState extends State<TweetBuilder> {
                         // Using ClipOval to clip the image to a circle
                         icon: ClipOval(
                             child: Image.network(
-                          "https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg",
+                          TweetBuilder.profileImageList[index],
                           height: 60,
                           width: 60,
                           fit: BoxFit.cover,
@@ -71,12 +98,14 @@ class _TweetBuilderState extends State<TweetBuilder> {
                             Row(
                               // For the Name and Username
                               children: [
-                                Text(widget.items[index].toString(),
+                                Text(TweetBuilder.nameList[index].toString(),
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20)),
                                 SizedBox(width: 5),
-                                Text("@" + widget.items[index].toString(),
+                                Text(
+                                    "@" +
+                                        TweetBuilder.nameList[index].toString(),
                                     style: TextStyle(
                                         fontWeight: FontWeight.normal,
                                         fontSize: 15)),
@@ -85,7 +114,7 @@ class _TweetBuilderState extends State<TweetBuilder> {
                             SizedBox(height: 10),
                             // For the Tweet
                             Text(
-                                "🚨BREAKING: Chelsea and Lyon have completed a £30m deal for Malo Gusto. Personal terms already agreed, Malo Gusto is in love with Ruben Loftus Cheek. 🔵🇫🇷 #cfc",
+                                TweetBuilder.tweetList[index].toString(),
                                 style: TextStyle(
                                     fontWeight: FontWeight.normal,
                                     fontSize: 15)),
