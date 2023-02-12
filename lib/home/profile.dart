@@ -13,17 +13,11 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   
-  List<Map<String, dynamic>> items = [];
-  List<bool> isLiked = [];
-  List<bool> isRetweeted = [];
 
   @override
   void initState() {
     super.initState();
-    items = [{},{},{},{},{}];
     setState(() {
-      isLiked = List.generate(items.length, (_) => false);
-      isRetweeted = List.generate(items.length, (_) => false);
     });
   }
 
@@ -283,7 +277,8 @@ class _ProfileState extends State<Profile> {
             SizedBox(height: 10),
             Container(
               height: 500,
-              child:TweetBuilder(items: items, isLiked: isLiked, isRetweeted: isRetweeted),
+              //  Invoking the TweetBuilder class to retrieve the tweets from the database
+              child:TweetBuilder(),
             ),
           ],
         )));
