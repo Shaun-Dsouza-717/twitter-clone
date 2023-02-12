@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:twitter/widget/login_app_bar.dart';
+import 'package:twitter/widget/common_app_bar.dart';
 import 'package:twitter/widget/login_nav_bar.dart';
 
 class Signup extends StatefulWidget {
@@ -8,12 +8,11 @@ class Signup extends StatefulWidget {
 
   @override
   State<Signup> createState() => _SignupState();
-
 }
 
 class _SignupState extends State<Signup> {
   bool isEmail = true;
-  
+
   void toggleEmail() {
     setState(() {
       isEmail = !isEmail;
@@ -24,8 +23,8 @@ class _SignupState extends State<Signup> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(kToolbarHeight), 
-          child: LoginAppBar()),
+          preferredSize: Size.fromHeight(kToolbarHeight),
+          child: CommonAppBar(isBack: true)),
       body: Container(
           height: double.infinity,
           color: Colors.white,
@@ -67,32 +66,35 @@ class _SignupState extends State<Signup> {
                         ),
                       )),
                   SizedBox(height: 75),
-                  isEmail ? TextFormField(
-                    decoration: InputDecoration(
-                      // border: OutlineInputBorder(),
-                      hintText: 'Phone',
-                      hintStyle: GoogleFonts.roboto(
-                        color: Colors.grey,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ): TextFormField(
-                    decoration: InputDecoration(
-                      // border: OutlineInputBorder(),
-                      hintText: 'Email',
-                      hintStyle: GoogleFonts.roboto(
-                        color: Colors.grey,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
+                  isEmail
+                      ? TextFormField(
+                          decoration: InputDecoration(
+                            // border: OutlineInputBorder(),
+                            hintText: 'Phone',
+                            hintStyle: GoogleFonts.roboto(
+                              color: Colors.grey,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        )
+                      : TextFormField(
+                          decoration: InputDecoration(
+                            // border: OutlineInputBorder(),
+                            hintText: 'Email',
+                            hintStyle: GoogleFonts.roboto(
+                              color: Colors.grey,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
                 ],
               ),
             ),
           )),
-      bottomNavigationBar: LoginNavBar(isEmail: isEmail, toggleEmail: toggleEmail),
+      bottomNavigationBar:
+          LoginNavBar(isEmail: isEmail, toggleEmail: toggleEmail),
     );
   }
 }
