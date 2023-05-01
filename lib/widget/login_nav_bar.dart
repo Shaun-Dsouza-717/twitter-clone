@@ -4,8 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 class LoginNavBar extends StatefulWidget {
   final bool isEmail;
   final Function toggleEmail;
+  final Function? signUp;
   const LoginNavBar(
-      {required this.isEmail, required this.toggleEmail, super.key});
+      {required this.isEmail, required this.toggleEmail, this.signUp, super.key});
 
   @override
   State<LoginNavBar> createState() => _LoginNavBarState();
@@ -45,17 +46,19 @@ class _LoginNavBarState extends State<LoginNavBar> {
                             MaterialStateProperty.all<Color>(Colors.blue),
                       ),
                       //  Check if the user is using email or phone to login
-                      child: widget.isEmail ? Text('Use email instead',
-                          style: GoogleFonts.roboto(
-                            color: Colors.blue,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          )) : Text('Use phone instead',
+                      child: widget.isEmail
+                          ? Text('Use email instead',
                               style: GoogleFonts.roboto(
                                 color: Colors.blue,
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
-                              )) ,
+                              ))
+                          : Text('Use phone instead',
+                              style: GoogleFonts.roboto(
+                                color: Colors.blue,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              )),
                       onPressed: () {
                         widget.toggleEmail();
                       }),
@@ -77,7 +80,9 @@ class _LoginNavBarState extends State<LoginNavBar> {
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           )),
-                      onPressed: () {}),
+                      onPressed: () {
+                        widget.signUp!();
+                      }),
                 ],
               ),
             ),

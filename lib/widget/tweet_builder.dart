@@ -34,11 +34,12 @@ class _TweetBuilderState extends State<TweetBuilder> {
           stream: firestoreRef,
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                //  If the connection is waiting then show a circular progress indicator
+            //  If the connection is waiting then show a circular progress indicator
             if (snapshot.connectionState == ConnectionState.waiting) {
+              // Showing a loading modal while the tweets are being fetched
               return CircularProgressIndicator(
                 color: Colors.blue,
-                strokeWidth: 2,
+                strokeWidth: 1,
               );
             }
             // If there is an error then show a text widget with the error
@@ -47,7 +48,8 @@ class _TweetBuilderState extends State<TweetBuilder> {
             }
             //  If the connection is active then initialize the lists of isLiked and isRetweeted and return the ListView.builder
             isLiked = List.generate(snapshot.data!.docs.length, (_) => false);
-            isRetweeted = List.generate(snapshot.data!.docs.length, (_) => false);
+            isRetweeted =
+                List.generate(snapshot.data!.docs.length, (_) => false);
 
             return ListView.builder(
               // Setting the itemCount to the length of the snapshot
