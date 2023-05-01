@@ -20,3 +20,29 @@ String? nameValidator(String value) {
   }
   return null;
 }
+
+// Password Validator
+String? passwordValidator(String value) {
+  if (value.isEmpty) {
+    return 'Password is required';
+  }
+  if (value.length < 8) {
+    return 'Password must be at least 8 characters';
+  }
+  if (!value.contains(
+      new RegExp(r'^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$'))) {
+    return 'Password must contain at least 1 uppercase letter and 1 symbol';
+  }
+  return null;
+}
+
+// Phone Validator
+String? phoneValidator(String value) {
+  if (value.isEmpty) {
+    return 'Phone number is required';
+  }
+  if (!RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)').hasMatch(value)) {
+    return 'Invalid phone number';
+  }
+  return null;
+}

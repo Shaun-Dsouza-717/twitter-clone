@@ -53,8 +53,8 @@ class _ProfileState extends State<Profile> {
                         shape: BoxShape.circle,
                       ),
                       child: ClipOval(
-                          child: Image.network(
-                        "https://wallpaperaccess.com/full/1892973.jpg",
+                          child: Image(
+                        image: AssetImage("assets/images/profile-photo.jpg"),
                         height: 90,
                         width: 90,
                         fit: BoxFit.cover,

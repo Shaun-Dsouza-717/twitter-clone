@@ -17,15 +17,24 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   // Data variables
   String _email = "", _password = "";
+  bool _isObscure = true;
   // Firebase Auth instance
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   void _validateAndSubmit(context) async {
     try {
+      // Showing a loading modal while the user is being signed in
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => Center(child: CircularProgressIndicator()));
+
       // Calling the Firebase Auth signInWithEmailAndPassword method to sign in the user
-      CircularProgressIndicator();
       UserCredential user = await _auth.signInWithEmailAndPassword(
           email: _email, password: _password);
+
+      Navigator.of(context).pop(); // Close the loading modal
+
       // If the user is signed in successfully, then the user is navigated to the Feed page
       Navigator.push(
         context,
@@ -44,6 +53,7 @@ class _LoginState extends State<Login> {
           ),
         ),
       );
+      Navigator.of(context).pop(); // Close the loading modal
       print('Error: $e');
     }
   }
@@ -86,7 +96,7 @@ class _LoginState extends State<Login> {
                           onChanged: (value) => _email = value,
                           //  Automatically calls the validator method when the user interacts with the field
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          // Calls the validation function imported form the validators.dart file 
+                          // Calls the validation function imported form the validators.dart file
                           validator: ((value) => emailValidator(value!)),
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -107,7 +117,7 @@ class _LoginState extends State<Login> {
                         child: TextFormField(
                           onChanged: (value) => _password = value,
                           validator: (value) => null,
-                          obscureText: true,
+                          obscureText: _isObscure,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderSide:
@@ -118,6 +128,20 @@ class _LoginState extends State<Login> {
                               color: Colors.grey,
                               fontSize: 18,
                               fontWeight: FontWeight.w400,
+                            ),
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _isObscure =
+                                      !_isObscure; // Toggle the boolean variable
+                                });
+                              },
+                              child: Icon(
+                                _isObscure
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: Colors.grey,
+                              ),
                             ),
                           ),
                         )),
@@ -195,7 +219,7 @@ class _LoginState extends State<Login> {
                                       fontWeight: FontWeight.bold,
                                     )),
                                 onPressed: () {
-                                      // Navigates to the Signup page
+                                  // Navigates to the Signup page
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
