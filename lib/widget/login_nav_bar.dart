@@ -47,13 +47,13 @@ class _LoginNavBarState extends State<LoginNavBar> {
                       ),
                       //  Check if the user is using email or phone to login
                       child: widget.isEmail
-                          ? Text('Use email instead',
+                          ? Text('Use phone instead',
                               style: GoogleFonts.roboto(
                                 color: Colors.blue,
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ))
-                          : Text('Use phone instead',
+                          : Text('Use email instead',
                               style: GoogleFonts.roboto(
                                 color: Colors.blue,
                                 fontSize: 16,

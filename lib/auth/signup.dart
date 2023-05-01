@@ -106,12 +106,12 @@ class _SignupState extends State<Signup> {
   // Function that toggles between email and password fields
   void toggleEmail() {
     if (isEmail) {
-      _phoneController.clear();
+      _emailController.clear();
       setState(() {
         isEmail = false;
       });
     } else {
-      _emailController.clear();
+      _phoneController.clear();
       setState(() {
         isEmail = true;
       });
