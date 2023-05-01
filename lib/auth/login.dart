@@ -23,9 +23,9 @@ class _LoginState extends State<Login> {
   void _validateAndSubmit(context) async {
     try {
       // Calling the Firebase Auth signInWithEmailAndPassword method to sign in the user
+      CircularProgressIndicator();
       UserCredential user = await _auth.signInWithEmailAndPassword(
           email: _email, password: _password);
-      CircularProgressIndicator();
       // If the user is signed in successfully, then the user is navigated to the Feed page
       Navigator.push(
         context,
