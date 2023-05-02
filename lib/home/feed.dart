@@ -4,6 +4,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:twitter/home/new_tweet.dart';
 import 'package:twitter/home/profile.dart';
 import 'package:twitter/widget/home_app_bar.dart';
 import 'package:twitter/widget/home_nav_bar.dart';
@@ -48,6 +49,25 @@ class _FeedState extends State<Feed> {
       // List View Builder to build the list of tweets
       // It also provides infinite scrolling
       body: TweetBuilder(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Navigate to the new tweet page
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => newTweet(profileImage: "assets/images/profile-photo.jpg",name:"Shaun Dsouza",username:"shaundsouza",),
+            ),
+          );
+        },
+        backgroundColor: Colors.blue,
+        child: ClipOval(
+        child : Image(image: AssetImage("assets/images/new-tweet.png"),
+        height: 150,
+        width:150,
+        fit: BoxFit.cover,)
+        )
+          
+      ),
       bottomNavigationBar: HomeNavBar(),
     );
   }

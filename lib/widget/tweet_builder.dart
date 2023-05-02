@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:twitter/home/profile.dart';
 import 'package:twitter/main.dart';
+import 'package:intl/intl.dart';
 
 class TweetBuilder extends StatefulWidget {
   const TweetBuilder({super.key});
@@ -22,7 +23,45 @@ class _TweetBuilderState extends State<TweetBuilder> {
   // Reference to the snapshot i.e data of the collection of the respective firebase app
   late final firestoreRef = FirebaseFirestore.instanceFor(app: firebaseApp)
       .collection("tweets")
+      .orderBy("timedate", descending: true)
       .snapshots();
+
+  String getTimeDifference(Timestamp timestamp) {
+    DateTime postTime = timestamp.toDate();
+    DateTime currentTime = DateTime.now();
+    Duration difference = currentTime.difference(postTime);
+
+    if (difference.inDays > 30) {
+      return DateFormat('MMM d').format(postTime);
+    } else if (difference.inDays > 0) {
+      return '${difference.inDays}d';
+    } else if (difference.inHours > 0) {
+      return '${difference.inHours}h';
+    } else if (difference.inMinutes > 0) {
+      return '${difference.inMinutes}m';
+    } else {
+      return 'now';
+    }
+  }
+  // // Function to like a tweet
+  // void likeTweet(int index, List<Map<String, dynamic>> tweets) {
+  //   // If the tweet is already liked then unlike it
+  //   if (isLiked[index]) {
+  //     // Decrementing the like count
+  //     FirebaseFirestore.instanceFor(app: firebaseApp)
+  //         .collection("tweets")
+  //         .doc(tweets[index]["id"])
+  //         .update({"likes": tweets[index]["likes"] - 1});
+  //   }
+  //   // If the tweet is not liked then like it
+  //   else {
+  //     // Incrementing the like count
+  //     FirebaseFirestore.instanceFor(app: firebaseApp)
+  //         .collection("tweets")
+  //         .doc(tweets[index]["id"])
+  //         .update({"likes": tweets[index]["likes"] + 1});
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +86,30 @@ class _TweetBuilderState extends State<TweetBuilder> {
               return Text("Error");
             }
             //  If the connection is active then initialize the lists of isLiked and isRetweeted and return the ListView.builder
-            isLiked = List.generate(snapshot.data!.docs.length, (_) => false);
-            isRetweeted =
-                List.generate(snapshot.data!.docs.length, (_) => false);
+            // isLiked = List.generate(snapshot.data!.docs.length, (_) => false);
+            // isRetweeted = List.generate(snapshot.data!.docs.length, (_) => false);
+
+                // Updating the length of isLiked and isRetweeted lists
+            if (isLiked.length < snapshot.data!.docs.length) {
+              isLiked.addAll(List.generate(
+                  snapshot.data!.docs.length - isLiked.length, (_) => false));
+            }
+            if (isRetweeted.length < snapshot.data!.docs.length) {
+              isRetweeted.addAll(List.generate(
+                  snapshot.data!.docs.length - isRetweeted.length,
+                  (_) => false));
+            }
 
             return ListView.builder(
               // Setting the itemCount to the length of the snapshot
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (BuildContext context, int index) {
+                // Getting the timestamp of the tweet
+                Timestamp timestamp = snapshot.data!.docs[index]['timedate'];
+
+                // Getting the time difference between the current time and the time the tweet was posted
+                String timeAgo = getTimeDifference(timestamp);
+
                 // It returns a container that contains the tweet
                 return Container(
                   padding: EdgeInsets.only(right: 10),
@@ -76,12 +131,21 @@ class _TweetBuilderState extends State<TweetBuilder> {
                             padding: EdgeInsets.only(left: 3, bottom: 60),
                             // Using ClipOval to clip the image to a circle
                             icon: ClipOval(
-                                child: Image.network(
-                              snapshot.data!.docs[index]["profile_photo"],
-                              height: 60,
-                              width: 60,
-                              fit: BoxFit.cover,
-                            )),
+                              child: Image(
+                                image: snapshot
+                                        .data!.docs[index]["profile_photo"]
+                                        .startsWith("assets")
+                                    ? AssetImage(snapshot.data!.docs[index]
+                                        ["profile_photo"])
+                                    : NetworkImage(snapshot.data!.docs[index]
+                                            ["profile_photo"])
+                                        as ImageProvider<Object>,
+                                height: 60,
+                                width: 60,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+
                             iconSize: 60,
                             alignment: Alignment.centerLeft,
                             // TODO : Add the onPressed function to open profile page
@@ -113,6 +177,16 @@ class _TweetBuilderState extends State<TweetBuilder> {
                                         style: TextStyle(
                                             fontWeight: FontWeight.normal,
                                             fontSize: 15)),
+                                    SizedBox(width: 5),
+                                    Text("·",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 15)),
+                                    SizedBox(width: 5),
+                                    Text(timeAgo,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 15)),
                                   ],
                                 ),
                                 SizedBox(height: 10),
@@ -130,20 +204,22 @@ class _TweetBuilderState extends State<TweetBuilder> {
                                           "assets/images/${isLiked[index] ? "heart_full" : "heart_empty"}.png",
                                           height: 20,
                                           width: 20,
-                                          color: isLiked[index]
+                                          color: isLiked[index] == true
                                               ? Colors.red
                                               : Colors.blue,
                                         ),
                                         onPressed: () => {
                                               setState(() {
+                                                print("Liked");
                                                 isLiked[index] =
                                                     !isLiked[index];
+                                                print(isLiked);
                                               })
                                             }),
                                     Padding(
                                       padding: EdgeInsets.only(right: 15.0),
                                       child: Text(
-                                          snapshot.data!.docs[index]["likes"]
+                                          snapshot.data!.docs[index]["likes"]                                                
                                               .toString(),
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
