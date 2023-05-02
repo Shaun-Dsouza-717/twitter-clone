@@ -60,8 +60,8 @@ class _EditProfileState extends State<EditProfile> {
                 children: <Widget>[
                   CircleAvatar(
                     radius: 60,
-                    backgroundImage: NetworkImage(
-                        "https://wallpaperaccess.com/full/1892973.jpg"),
+                    backgroundImage: AssetImage(
+                        "assets/images/profile-photo.jpg"),
                   ),
                   Positioned(
                     bottom: 0,

@@ -27,7 +27,7 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
         // App Bar for profile which contains name and no. of tweets
         appBar: PreferredSize(
-            child: CommonAppBar(isBack: true, type: "profile"),
+            child: CommonAppBar(isBack: true, type: "Profile"),
             preferredSize: Size.fromHeight(kToolbarHeight)),
         // scroll view body to contain profile details
         body: SingleChildScrollView(
