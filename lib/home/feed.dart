@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:twitter/home/new_tweet.dart';
 import 'package:twitter/home/profile.dart';
+import 'package:twitter/widget/app_drawer.dart';
 import 'package:twitter/widget/home_app_bar.dart';
 import 'package:twitter/widget/home_nav_bar.dart';
 import 'package:twitter/widget/tweet_builder.dart';
@@ -19,6 +20,7 @@ class Feed extends StatefulWidget {
 
 class _FeedState extends State<Feed> {
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -32,6 +34,8 @@ class _FeedState extends State<Feed> {
     // Returns a Scaffold widget
     // TODO : Implement the Feed UI
     return Scaffold(
+      // Setting the key to use it in the drawer
+      key: _scaffoldKey,
       // Setting PrefferedSize for the AppBar to the height of the toolbar which automatically varies as per phone size
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
@@ -44,8 +48,9 @@ class _FeedState extends State<Feed> {
                 ),
               ),
             ),
-            child: HomeAppBar()),
+            child: HomeAppBar(scaffoldRef: _scaffoldKey)),
       ),
+      drawer: AppDrawer(),
       // List View Builder to build the list of tweets
       // It also provides infinite scrolling
       body: TweetBuilder(),

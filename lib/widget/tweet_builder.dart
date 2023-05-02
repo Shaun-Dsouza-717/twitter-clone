@@ -166,7 +166,7 @@ class _TweetBuilderState extends State<TweetBuilder> {
                                   // For the Name and Username
                                   children: [
                                     Text(snapshot.data!.docs[index]["name"],
-                                        style: TextStyle(
+                                        style: GoogleFonts.roboto(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20)),
                                     SizedBox(width: 5),
@@ -174,17 +174,17 @@ class _TweetBuilderState extends State<TweetBuilder> {
                                         "@" +
                                             snapshot.data!.docs[index]
                                                 ["username"],
-                                        style: TextStyle(
+                                        style: GoogleFonts.roboto(
                                             fontWeight: FontWeight.normal,
                                             fontSize: 15)),
                                     SizedBox(width: 5),
                                     Text("·",
-                                        style: TextStyle(
+                                        style: GoogleFonts.roboto(
                                             fontWeight: FontWeight.normal,
                                             fontSize: 15)),
                                     SizedBox(width: 5),
                                     Text(timeAgo,
-                                        style: TextStyle(
+                                        style: GoogleFonts.roboto(
                                             fontWeight: FontWeight.normal,
                                             fontSize: 15)),
                                   ],
@@ -192,7 +192,7 @@ class _TweetBuilderState extends State<TweetBuilder> {
                                 SizedBox(height: 10),
                                 // For the Tweet
                                 Text(snapshot.data!.docs[index]["tweet"],
-                                    style: TextStyle(
+                                    style: GoogleFonts.roboto(
                                         fontWeight: FontWeight.normal,
                                         fontSize: 15)),
                                 SizedBox(height: 10),
@@ -219,9 +219,9 @@ class _TweetBuilderState extends State<TweetBuilder> {
                                     Padding(
                                       padding: EdgeInsets.only(right: 15.0),
                                       child: Text(
-                                          snapshot.data!.docs[index]["likes"]                                                
+                                           (snapshot.data!.docs[index]["likes"]   + (isLiked[index] ? 1 : 0))                                             
                                               .toString(),
-                                          style: TextStyle(
+                                          style: GoogleFonts.roboto(
                                               fontWeight: FontWeight.normal,
                                               fontSize: 15)),
                                     ),
@@ -238,7 +238,7 @@ class _TweetBuilderState extends State<TweetBuilder> {
                                       child: Text(
                                           snapshot.data!.docs[index]["comments"]
                                               .toString(),
-                                          style: TextStyle(
+                                          style: GoogleFonts.roboto(
                                               fontWeight: FontWeight.normal,
                                               fontSize: 15)),
                                     ),
@@ -262,7 +262,7 @@ class _TweetBuilderState extends State<TweetBuilder> {
                                       child: Text(
                                           snapshot.data!.docs[index]["retweets"]
                                               .toString(),
-                                          style: TextStyle(
+                                          style: GoogleFonts.roboto(
                                               fontWeight: FontWeight.normal,
                                               fontSize: 15)),
                                     ),

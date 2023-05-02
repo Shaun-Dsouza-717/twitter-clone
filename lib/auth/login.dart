@@ -2,6 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:twitter/auth/forgot_password.dart';
 import 'package:twitter/auth/signup.dart';
 import 'package:twitter/home/feed.dart';
 import 'package:twitter/validation/validators.dart';
@@ -195,7 +196,15 @@ class _LoginState extends State<Login> {
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 )),
-                            onPressed: () {})),
+                            onPressed: () {
+                              // Navigates to the Forgot Password page
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ForgotPassword(),
+                                ),
+                              );
+                            })),
                     SizedBox(height: 25),
                     Container(
                         width: double.infinity,
