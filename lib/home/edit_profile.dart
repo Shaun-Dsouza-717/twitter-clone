@@ -40,12 +40,7 @@ class _EditProfileState extends State<EditProfile> {
                 Icons.done,
                 color: Colors.blue,
               ),
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Profile(),
-                ),
-              ),
+              onPressed: () => Navigator.pop(context),
             ),
           ]),
       body: SingleChildScrollView(

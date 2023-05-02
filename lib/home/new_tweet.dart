@@ -153,7 +153,7 @@ class _newTweetState extends State<newTweet> {
                                         children: <Widget>[
                                           Text(
                                             "Who can reply?",
-                                            style: TextStyle(
+                                            style: GoogleFonts.roboto(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 18,
                                             ),
@@ -161,7 +161,7 @@ class _newTweetState extends State<newTweet> {
                                           SizedBox(height: 5),
                                           Text(
                                             "Choose who can reply to this Tweet. Anyone mentioned can always reply. ",
-                                            style: TextStyle(
+                                            style: GoogleFonts.roboto(
                                               fontSize: 14,
                                             ),
                                           ),
