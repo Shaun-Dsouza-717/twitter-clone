@@ -25,8 +25,7 @@ class _SignupState extends State<Signup> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future signUp() async {
-
-    if(_email.isEmpty && _password.isEmpty){
+    if (_name.isEmpty && _email.isEmpty && _password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Please enter email and password'),
@@ -56,6 +55,17 @@ class _SignupState extends State<Signup> {
         context,
         MaterialPageRoute(builder: (context) => Login()),
       );
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Account Created Successfully'),
+          backgroundColor: Colors.blue,
+          behavior: SnackBarBehavior.floating,
+          action: SnackBarAction(
+            label: '',
+            onPressed: () {},
+          ),
+        ),
+      );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -69,7 +79,7 @@ class _SignupState extends State<Signup> {
             ),
           ),
         );
-      Navigator.of(context).pop(); // Close the loading modal
+        Navigator.of(context).pop(); // Close the loading modal
 
       } else if (e.code == 'email-already-in-use') {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -83,7 +93,7 @@ class _SignupState extends State<Signup> {
             ),
           ),
         );
-      Navigator.of(context).pop(); // Close the loading modal
+        Navigator.of(context).pop(); // Close the loading modal
 
       }
     } catch (e) {
