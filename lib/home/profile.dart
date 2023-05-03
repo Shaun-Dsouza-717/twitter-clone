@@ -12,13 +12,27 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  
+  String _name = "Shaun Dsouza";
 
   @override
   void initState() {
     super.initState();
-    setState(() {
-    });
+    setState(() {});
+  }
+
+  Future editProfile()async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EditProfile(),
+      ),
+    );
+
+    if(result != null) {
+      setState(() {
+        _name = result;
+      });
+    }
   }
 
   @override
@@ -89,14 +103,9 @@ class _ProfileState extends State<Profile> {
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         )),
-                    onPressed: () {
-                        Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EditProfile(),
-                        ),
-                        );
-                    },
+                    onPressed:() {
+                      editProfile();
+                      },
                   ),
                 ),
               ),
@@ -116,7 +125,7 @@ class _ProfileState extends State<Profile> {
                               // Name and username
                               Container(
                                 width: 280,
-                                child: Text('Shaun Dsouza',
+                                child: Text(_name,
                                     textAlign: TextAlign.left,
                                     style: GoogleFonts.roboto(
                                       color: Colors.black,
@@ -278,7 +287,7 @@ class _ProfileState extends State<Profile> {
             Container(
               height: 500,
               //  Invoking the TweetBuilder class to retrieve the tweets from the database
-              child:TweetBuilder(),
+              child: TweetBuilder(),
             ),
           ],
         )));

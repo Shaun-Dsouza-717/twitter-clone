@@ -12,6 +12,7 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
+  String _name = "";
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class _EditProfileState extends State<EditProfile> {
                 Icons.done,
                 color: Colors.blue,
               ),
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => Navigator.pop(context, _name),
             ),
           ]),
       body: SingleChildScrollView(
@@ -91,6 +92,11 @@ class _EditProfileState extends State<EditProfile> {
                   Container(
                       width: 350,
                       child: TextFormField(
+                        onChanged: (value) {
+                          setState(() {
+                            _name = value;
+                          });
+                        },
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator:((value) => nameValidator(value!)),
                         initialValue: "Shaun Dsouza",

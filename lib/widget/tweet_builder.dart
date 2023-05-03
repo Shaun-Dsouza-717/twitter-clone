@@ -191,10 +191,12 @@ class _TweetBuilderState extends State<TweetBuilder> {
                                 ),
                                 SizedBox(height: 10),
                                 // For the Tweet
-                                Text(snapshot.data!.docs[index]["tweet"],
+                                Container(
+                                    width: double.infinity,
+                                child: Text(snapshot.data!.docs[index]["tweet"],
                                     style: GoogleFonts.roboto(
                                         fontWeight: FontWeight.normal,
-                                        fontSize: 15)),
+                                        fontSize: 15))),
                                 SizedBox(height: 10),
                                 // Contains the like, comment and retweet buttons
                                 Row(
